@@ -25,7 +25,7 @@ pub(crate) mod verifier;
 // TODO Need to check if this is fine with the Verifier algorithm
 // TODO Note KeyState holds more information
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub(crate) enum ExtPresent {
+pub enum ExtPresent {
     // This means that there is no extensions present at all
     // this corresponds to the case of when the key is not in the trie
     // and the place where we would place it is empty.
@@ -162,11 +162,11 @@ impl VerificationHint {
 
 // Auxillary information that the verifier needs in order to update the root statelessly
 pub struct UpdateHint {
-    depths_and_ext_by_stem: BTreeMap<[u8; 31], (ExtPresent, u8)>,
+    pub depths_and_ext_by_stem: BTreeMap<[u8; 31], (ExtPresent, u8)>,
     // This will be used to get the old commitment for a particular node
     // So that we can compute the delta between it and the new commitment
-    commitments_by_path: BTreeMap<Vec<u8>, Element>,
-    other_stems_by_prefix: BTreeMap<Vec<u8>, [u8; 31]>,
+    pub commitments_by_path: BTreeMap<Vec<u8>, Element>,
+    pub other_stems_by_prefix: BTreeMap<Vec<u8>, [u8; 31]>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
